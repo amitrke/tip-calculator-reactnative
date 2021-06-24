@@ -29,20 +29,32 @@ export default class TabOneScreen extends React.Component {
 
   private updateBillAmount(amount: string) {
     const newState={... this.state};
-    newState.billAmount = parseFloat(amount);
-    this.setState(this.updateCalculations(newState));
+    let input = parseFloat(amount);
+    if (isNaN(input)) input = 0;
+    if (input >= 0) {
+      newState.billAmount = input;
+      this.setState(this.updateCalculations(newState));
+    }
   }
 
   private updateTipPct(tipPct: string) {
     const newState={... this.state};
-    newState.tipPct = parseFloat(tipPct);
-    this.setState(this.updateCalculations(newState));
+    let input = parseFloat(tipPct);
+    if (isNaN(input)) input = 0;
+    if (input >= 0 && input <= 40) {
+      newState.tipPct = input;
+      this.setState(this.updateCalculations(newState));
+    }
   }
 
   private updateNumPeople(numPeople: string) {
     const newState={... this.state};
-    newState.numberOfPeople = parseInt(numPeople);
-    this.setState(this.updateCalculations(newState));
+    let input = parseInt(numPeople);
+    if (isNaN(input)) input = 0;
+    if (input >= 0 && input < 40) {
+      newState.numberOfPeople = input;
+      this.setState(this.updateCalculations(newState));
+    }
   }
 
   render() {
@@ -55,7 +67,7 @@ export default class TabOneScreen extends React.Component {
             <Text style={styles.strLabel}>Bill Amount</Text>
           </View>
           <View style={styles.inputCol}>
-            <TextInput style={styles.strValue} keyboardType="number-pad" defaultValue="0" onChangeText={(text) => this.updateBillAmount(text)} ></TextInput>
+            <TextInput style={styles.strValue} keyboardType="number-pad" onChangeText={(text) => this.updateBillAmount(text)} value={String(this.state.billAmount)}></TextInput>
           </View>
         </View>
         <View style={styles.rowContainer}>
@@ -63,7 +75,7 @@ export default class TabOneScreen extends React.Component {
             <Text style={styles.strLabel}>Tip Percent</Text>
           </View>
           <View style={styles.inputCol}>
-            <TextInput style={styles.strValue} keyboardType="number-pad" defaultValue="15" onChangeText={(text) => this.updateTipPct(text)}></TextInput>
+            <TextInput style={styles.strValue} keyboardType="number-pad" onChangeText={(text) => this.updateTipPct(text)} value={String(this.state.tipPct)}></TextInput>
           </View>
         </View>
         <View style={styles.rowContainer}>
@@ -75,10 +87,10 @@ export default class TabOneScreen extends React.Component {
           </View>
         </View>
         <View style={styles.rowContainer}>
-          <View style={styles.labelCol}>
+          <View style={styles.labelCol} lightColor="#eee" darkColor="rgba(255,255,255,0.1)">
             <Text style={styles.strLabel}>Total Amount</Text>
           </View>
-          <View style={styles.inputCol}>
+          <View style={styles.inputCol} lightColor="#eee" darkColor="rgba(255,255,255,0.1)">
           <Text style={styles.strValue}>{this.state.totalAmount}</Text>
           </View>
         </View>
@@ -89,7 +101,7 @@ export default class TabOneScreen extends React.Component {
             <Text style={styles.strLabel}>No. of People</Text>
           </View>
           <View style={styles.inputCol}>
-            <TextInput style={styles.strValue} keyboardType="number-pad" defaultValue="1" onChangeText={(text) => this.updateNumPeople(text)}></TextInput>
+            <TextInput style={styles.strValue} keyboardType="number-pad" defaultValue="1" onChangeText={(text) => this.updateNumPeople(text)} value={String(this.state.numberOfPeople)}></TextInput>
           </View>
         </View>
         <View style={styles.rowContainer}>

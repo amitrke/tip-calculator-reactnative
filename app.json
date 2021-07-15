@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "tip-calculator-reactnative",
+    "name": "Easy Tip and Split Calculator",
     "slug": "tip-calculator-reactnative",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -19,7 +19,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.subnext.tipcalcbillsplit",
+      "buildNumber": "2"
     },
     "android": {
       "adaptiveIcon": {
@@ -27,7 +29,8 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [],
-      "package": "com.subnext.tipcalcbillsplit"
+      "package": "com.subnext.tipcalcbillsplit",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

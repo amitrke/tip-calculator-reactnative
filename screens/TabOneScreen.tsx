@@ -1,6 +1,8 @@
+import { MaterialIcons } from '@expo/vector-icons';
+import { Box, Center, Flex, Heading, HStack, Icon, Input, Text, VStack } from 'native-base';
 import * as React from 'react';
 import { Dimensions, StyleSheet, TextInput } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { View } from '../components/Themed';
 
 export default class TabOneScreen extends React.Component {
 
@@ -19,8 +21,8 @@ export default class TabOneScreen extends React.Component {
     }
   }
 
-  private updateCalculations (inputState: DataState): DataState {
-    const resultState = {... inputState};
+  private updateCalculations(inputState: DataState): DataState {
+    const resultState = { ...inputState };
     resultState.tipAmount = resultState.billAmount * resultState.tipPct / 100;
     resultState.totalAmount = resultState.billAmount + resultState.tipAmount;
     resultState.eachPersonPays = resultState.totalAmount / resultState.numberOfPeople;
@@ -28,7 +30,7 @@ export default class TabOneScreen extends React.Component {
   }
 
   private updateBillAmount(amount: string) {
-    const newState={... this.state};
+    const newState = { ... this.state };
     let input = parseFloat(amount);
     if (isNaN(input)) input = 0;
     if (input >= 0) {
@@ -38,7 +40,7 @@ export default class TabOneScreen extends React.Component {
   }
 
   private updateTipPct(tipPct: string) {
-    const newState={... this.state};
+    const newState = { ... this.state };
     let input = parseFloat(tipPct);
     if (isNaN(input)) input = 0;
     if (input >= 0 && input <= 40) {
@@ -48,7 +50,7 @@ export default class TabOneScreen extends React.Component {
   }
 
   private updateNumPeople(numPeople: string) {
-    const newState={... this.state};
+    const newState = { ... this.state };
     let input = parseInt(numPeople);
     if (isNaN(input)) input = 0;
     if (input >= 0 && input < 40) {
@@ -59,60 +61,194 @@ export default class TabOneScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Tip</Text>
-        <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-        <View style={styles.rowContainer}>
-          <View style={styles.labelCol}>
-            <Text style={styles.strLabel}>Bill Amount</Text>
-          </View>
-          <View style={styles.inputCol}>
-            <TextInput style={styles.strValue} keyboardType="number-pad" onChangeText={(text) => this.updateBillAmount(text)} value={String(this.state.billAmount)}></TextInput>
-          </View>
-        </View>
-        <View style={styles.rowContainer}>
-          <View style={styles.labelCol}>
-            <Text style={styles.strLabel}>Tip Percent</Text>
-          </View>
-          <View style={styles.inputCol}>
-            <TextInput style={styles.strValue} keyboardType="number-pad" onChangeText={(text) => this.updateTipPct(text)} value={String(this.state.tipPct)}></TextInput>
-          </View>
-        </View>
-        <View style={styles.rowContainer}>
-          <View style={styles.labelCol}>
-            <Text style={styles.strLabel}>Tip Amount</Text>
-          </View>
-          <View style={styles.inputCol}>
-          <Text style={styles.strValue}>{this.state.tipAmount}</Text>
-          </View>
-        </View>
-        <View style={styles.rowContainer}>
-          <View style={styles.labelCol} lightColor="#eee" darkColor="rgba(255,255,255,0.1)">
-            <Text style={styles.strLabel}>Total Amount</Text>
-          </View>
-          <View style={styles.inputCol} lightColor="#eee" darkColor="rgba(255,255,255,0.1)">
-          <Text style={styles.strValue}>{this.state.totalAmount}</Text>
-          </View>
-        </View>
-        <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-        <Text style={styles.title}>Split</Text>
-        <View style={styles.rowContainer}>
-          <View style={styles.labelCol}>
-            <Text style={styles.strLabel}>No. of People</Text>
-          </View>
-          <View style={styles.inputCol}>
-            <TextInput style={styles.strValue} keyboardType="number-pad" defaultValue="1" onChangeText={(text) => this.updateNumPeople(text)} value={String(this.state.numberOfPeople)}></TextInput>
-          </View>
-        </View>
-        <View style={styles.rowContainer}>
-          <View style={styles.labelCol}>
-            <Text style={styles.strLabel}>Each Person Pays</Text>
-          </View>
-          <View style={styles.inputCol}>
-          <Text style={styles.strValue}>{this.state.eachPersonPays}</Text>
-          </View>
-        </View>
-      </View>
+      <Center>
+        <VStack space={4} alignItems="center" width={0.95} height="100%">
+          <Heading size="md" margin={3}>
+            Tip
+          </Heading>
+
+          <VStack space={4} alignItems="center">
+            <HStack space={3}>
+              <Center flex={1} rounded="lg" borderWidth="1px" borderColor="grey">
+                <Text fontSize="lg" margin={1}>Bill Amount</Text>
+                <Input 
+                  margin={1}
+                  variant="rounded"
+                  keyboardType="numeric"
+                  InputLeftElement={
+                    <Icon
+                      as={<MaterialIcons name="receipt-long" />}
+                      size="md"
+                      _light={{
+                        color: "black",
+                      }}
+                      _dark={{
+                        color: "gray.300",
+                      }}
+                    />
+                  }
+                  size="xl"
+                  onChangeText={(text) => this.updateBillAmount(text)} 
+                  value={String(this.state.billAmount)}
+                />
+              </Center>
+              <Center flex={1} rounded="lg" borderWidth="1px" borderColor="grey">
+                <Text fontSize="lg" margin={1}>Tip Percent</Text>
+                <Input 
+                  margin={1}
+                  variant="rounded"
+                  keyboardType="numeric"
+                  InputLeftElement={
+                    <Text fontSize="3xl" bold={true} marginLeft={1}>%</Text>
+                  }
+                  placeholder="Input" // mx={4}
+                  _light={{
+                    placeholderTextColor: "blueGray.400",
+                  }}
+                  _dark={{
+                    placeholderTextColor: "blueGray.50",
+                  }}
+                  size="xl"
+                  onChangeText={(text) => this.updateTipPct(text)} 
+                  value={String(this.state.tipPct)}
+                />
+              </Center>
+            </HStack>
+            <HStack space={3}>
+              <Center flex={1} rounded="lg" borderWidth="1px" borderColor="grey">
+                <Text fontSize="lg" margin={1}>Tip Amount</Text>
+                <Input 
+                  margin={1}
+                  variant="rounded"
+                  isReadOnly={true}
+                  InputLeftElement={
+                    <Icon
+                      as={<MaterialIcons name="redeem" />}
+                      size="md"
+                      _light={{
+                        color: "black",
+                      }}
+                      _dark={{
+                        color: "gray.300",
+                      }}
+                    />
+                  }
+                  _light={{
+                    placeholderTextColor: "blueGray.400",
+                  }}
+                  _dark={{
+                    placeholderTextColor: "blueGray.50",
+                  }}
+                  size="xl"
+                  value={String(this.state.tipAmount)}
+                />
+              </Center>
+              <Center flex={1} rounded="lg" borderWidth="1px" borderColor="grey">
+                <Text fontSize="lg" margin={1}>Total Amount</Text>
+                <Input 
+                  margin={1}
+                  variant="rounded"
+                  isReadOnly={true}
+                  InputLeftElement={
+                    <Icon
+                      as={<MaterialIcons name="attach-money" />}
+                      size="md"
+                      m={2}
+                      _light={{
+                        color: "black",
+                      }}
+                      _dark={{
+                        color: "gray.300",
+                      }}
+                    />
+                  }
+                  placeholder="Input" // mx={4}
+                  _light={{
+                    placeholderTextColor: "blueGray.400",
+                  }}
+                  _dark={{
+                    placeholderTextColor: "blueGray.50",
+                  }}
+                  size="xl"
+                  value={String(this.state.totalAmount)}
+                />
+              </Center>
+            </HStack>
+          </VStack>
+
+          <Heading size="md" margin={3}>
+            Split
+          </Heading>
+
+          <VStack space={4} alignItems="center">
+            <HStack space={3}>
+              <Center flex={1} rounded="lg" borderWidth="1px" borderColor="grey">
+                <Text fontSize="lg" margin={1}>No. of People</Text>
+                <Input
+                  margin={1}
+                  variant="rounded"
+                  keyboardType="numeric"
+                  InputLeftElement={
+                    <Icon
+                      as={<MaterialIcons name="people" />}
+                      size="md"
+                      m={2}
+                      _light={{
+                        color: "black",
+                      }}
+                      _dark={{
+                        color: "gray.300",
+                      }}
+                    />
+                  }
+                  placeholder="Input" // mx={4}
+                  _light={{
+                    placeholderTextColor: "blueGray.400",
+                  }}
+                  _dark={{
+                    placeholderTextColor: "blueGray.50",
+                  }}
+                  size="xl"
+                  onChangeText={(text) => this.updateNumPeople(text)}
+                  value={String(this.state.numberOfPeople)}
+                />
+              </Center>
+              <Center flex={1} rounded="lg" borderWidth="1px" borderColor="grey">
+                <Text fontSize="lg" margin={1}>Each Person Pays</Text>
+                <Input
+                  margin={1}
+                  variant="rounded"
+                  isReadOnly={true}
+                  InputLeftElement={
+                    <Icon
+                      as={<MaterialIcons name="person" />}
+                      size="md"
+                      m={2}
+                      _light={{
+                        color: "black",
+                      }}
+                      _dark={{
+                        color: "gray.300",
+                      }}
+                    />
+                  }
+                  placeholder="Input" // mx={4}
+                  _light={{
+                    placeholderTextColor: "blueGray.400",
+                  }}
+                  _dark={{
+                    placeholderTextColor: "blueGray.50",
+                  }}
+                  size="xl"
+                  value={String(this.state.eachPersonPays)}
+                />
+              </Center>
+            </HStack>
+
+          </VStack>
+
+        </VStack>
+      </Center>
     );
   }
 
@@ -127,14 +263,14 @@ export type DataState = {
   eachPersonPays: number;
 }
 
-const screen = Dimensions.get("window");
-const columnWidth = screen.width / 2;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
+    // borderColor: 'black',
+    // borderWidth: 2,
+    margin: 10
   },
   title: {
     fontSize: 20,
@@ -146,8 +282,9 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   inputCol: {
-    width: columnWidth,
-    borderWidth: 1
+    borderWidth: 1,
+    width: '50%',
+    // borderColor: 'red'
   },
   strLabel: {
     fontSize: 25
@@ -157,12 +294,16 @@ const styles = StyleSheet.create({
     textAlign: "right"
   },
   rowContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: "flex-start",
     flexDirection: "row",
     marginHorizontal: 50,
+    width: '100%'
   },
   labelCol: {
     borderWidth: 1,
-    width: columnWidth,
+    width: '50%',
     alignItems: "flex-start"
   }
 });

@@ -1,25 +1,14 @@
-## Welcome to GitHub Pages
+## Tip Calculator
 
-You can use the [editor on GitHub](https://github.com/amitrke/tip-calculator-reactnative/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+This app has been developed using Expo and ReactNative
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Lessons Learned
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
+1. Expo cloud editor.
+2. Expo build system.
+3. Version update for Expo in Github Actions pipeline.
+4. Deploy to Android and IOS App Store.
+5. VSCode Remote Deploy.
 
 **Bold** and _Italic_ and `Code` text
 

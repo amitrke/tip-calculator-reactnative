@@ -28,6 +28,6 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-   
             ${{ runner.os }}-build- 
             ${{ runner.os }}-
-      - run: yarn install
+      - run: npm install
       - run: ./node_modules/.bin/jest
       - run: expo publish

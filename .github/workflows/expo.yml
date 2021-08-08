@@ -18,3 +18,5 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
       - run: yarn install
       - run: expo publish
+      - run: expo --no-wait build:android
+      - run: expo --no-wait build:ios

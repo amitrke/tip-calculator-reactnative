@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk add openjdk8 npm bash git
+RUN apk add npm bash git
 WORKDIR /app
-RUN npm install -g --force firebase-tools expo-cli turtle-cli @expo/ngrok
+RUN npm install -g --force expo-cli @expo/ngrok npm-check
 CMD tail -f /dev/null

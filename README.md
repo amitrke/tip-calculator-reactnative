@@ -12,6 +12,8 @@
 
 [Android PlayStore Test URL](https://play.google.com/apps/internaltest/4699401688780736937)
 
+[Lessons Learned](https://amitrke.github.io/tip-calculator-reactnative/)
+
 ### Build using Expo
 
 expo build:ios

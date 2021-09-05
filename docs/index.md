@@ -1,26 +1,34 @@
-## Tip Calculator
+# Tip Calculator
 
 This app has been developed using Expo and ReactNative
 
-### Lessons Learned
+## Lessons Learned
 
-1. Expo cloud editor.
-2. Expo build system.
-3. Version update for Expo in Github Actions pipeline.
-4. Deploy to Android and IOS App Store.
-5. VSCode Remote Deploy.
+### Expo cloud editor
+Expo makes developing, building and deploying React Native Apps easy.
 
-**Bold** and _Italic_ and `Code` text
+Expo also has this [online editor](https://snack.expo.dev/) using which I was able to learn the basics without having to setup the local environment.
 
-[Link](url) and ![Image](src)
+### Expo build system
+Expo has build [pipeline service](https://expo.dev/) that can be used to build Android and IOS builds.
+
+### Version update for Expo in Github Actions pipeline
+Once I started using Github Actions with Expo build pipelines, updating versions quickly became a problem.
+I would often forget to update the version number for either Android or IOS and after waiting for builds to be ready and deploying them to respective app stores, I would find that the version is same as the one that I deployed last time.
+[Standard Version](https://github.com/conventional-changelog/standard-version) solves this issue
+
 ```
+- run: npm install
+- run: ./node_modules/.bin/standard-version --release-as minor
+- run: expo build:android --no-wait
+- run: expo build:ios --no-wait
+```
+### Deploy to Android and IOS App Store
+TODO
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+### VSCode Remote Deploy
+TODO
 
-### Jekyll Themes
+### Native Base
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/amitrke/tip-calculator-reactnative/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+### Dark Mode compatibility

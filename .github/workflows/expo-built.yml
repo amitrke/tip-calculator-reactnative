@@ -30,4 +30,4 @@ jobs:
             ${{ runner.os }}-
       - run: npm install
       - run: ./node_modules/.bin/jest
-      #- run: expo publish
+      - run: expo publish

@@ -5,7 +5,7 @@ import React from 'react';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
-import { NativeBaseProvider } from 'native-base';
+import { extendTheme, NativeBaseProvider } from 'native-base';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -14,8 +14,13 @@ export default function App() {
   if (!isLoadingComplete) {
     return null;
   } else {
+    const theme = extendTheme({
+      config: {
+        useSystemColorMode: true
+      }
+    });
     return (
-      <NativeBaseProvider>
+      <NativeBaseProvider theme={theme}>
         <Navigation colorScheme={colorScheme} />
         <StatusBar />
       </NativeBaseProvider>

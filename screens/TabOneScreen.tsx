@@ -1,7 +1,8 @@
 import { MaterialIcons } from '@expo/vector-icons';
 import { Box, Center, Flex, Heading, HStack, Icon, Input, Text, VStack } from 'native-base';
 import * as React from 'react';
-import { Dimensions, StyleSheet, TextInput } from 'react-native';
+import { Dimensions, Keyboard, StyleSheet, TextInput } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { View } from '../components/Themed';
 
 export default class TabOneScreen extends React.Component {
@@ -61,6 +62,7 @@ export default class TabOneScreen extends React.Component {
 
   render() {
     return (
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <Center>
         <VStack space={4} alignItems="center" width={0.95} height="100%">
           <Heading size="md" margin={3}>
@@ -249,6 +251,7 @@ export default class TabOneScreen extends React.Component {
 
         </VStack>
       </Center>
+      </TouchableWithoutFeedback>
     );
   }
 

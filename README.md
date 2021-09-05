@@ -14,6 +14,8 @@
 
 [Lessons Learned](https://amitrke.github.io/tip-calculator-reactnative/)
 
+[Conventional Commits Specification](https://www.conventionalcommits.org/en/v1.0.0/) to be followed in this repository.
+
 ### Build using Expo
 
 expo build:ios

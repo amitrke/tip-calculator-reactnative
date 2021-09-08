@@ -2,6 +2,9 @@
 
 This app has been developed using Expo and ReactNative
 
+<a href='https://play.google.com/store/apps/details?id=com.subnext.tipcalcbillsplit&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width=200 alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+<a href="https://apps.apple.com/us/app/easy-tip-and-split-calculator/id1576452022"><img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-example-preferred.png"></a>
+
 ## Lessons Learned
 
 ### Expo cloud editor

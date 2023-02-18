@@ -32,3 +32,8 @@ TODO
 ### Native Base
 
 ### Dark Mode compatibility
+
+### Limitations of Expo
+- Bundle size is large compared to the same app created with Flutter.
+- Dependency on Expo.dev CI to build simulator and app store builds, Wait time can be painful during CI, I wish I could just use Github Actions to build the bundles.
+- Unable to use fastlane to generate screenshots.

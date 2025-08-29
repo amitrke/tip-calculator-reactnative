@@ -1,29 +1,11 @@
-import 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-
-import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation';
-import { extendTheme, NativeBaseProvider } from 'native-base';
+import { GluestackUIProvider } from "@gluestack-ui/themed";
+import { config } from "@gluestack-ui/config";
+import Navigation from "./navigation";
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
-
-  if (!isLoadingComplete) {
-    return null;
-  } else {
-    const theme = extendTheme({
-      config: {
-        useSystemColorMode: true
-      }
-    });
-    return (
-      <NativeBaseProvider theme={theme}>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </NativeBaseProvider>
-    );
-  }
+  return (
+    <GluestackUIProvider config={config}>
+      <Navigation />
+    </GluestackUIProvider>
+  );
 }

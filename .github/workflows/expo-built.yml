@@ -8,26 +8,25 @@ jobs:
     name: Expo Build Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
         with:
-          node-version: 14.x
-      - uses: expo/expo-github-action@v6
+          version: 8
+      - uses: actions/setup-node@v3
         with:
-          expo-version: 4.x
+          node-version: 18
+          cache: 'pnpm'
+      - uses: expo/expo-github-action@v8
+        with:
+          expo-version: 5.x
           token: ${{ secrets.EXPO_TOKEN }}
-      - name: Cache Node Modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
+      - name: Cache pnpm modules
+        uses: actions/cache@v3
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-   
-            ${{ runner.os }}-build- 
             ${{ runner.os }}-
-      - run: npm install
-      - run: ./node_modules/.bin/jest
+      - run: pnpm install
+      - run: pnpm test
       - run: expo publish

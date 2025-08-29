@@ -1,312 +1,115 @@
+import React, { useState, useMemo } from 'react';
+import { Keyboard } from 'react-native';
+import {
+  Heading,
+  VStack,
+  HStack,
+  Input,
+  InputField,
+  Text,
+  Box,
+  Icon,
+  Pressable
+} from '@gluestack-ui/themed';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Box, Center, Flex, Heading, HStack, Icon, Input, Text, VStack } from 'native-base';
-import * as React from 'react';
-import { Dimensions, Keyboard, StyleSheet, TextInput } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { View } from '../components/Themed';
 
-export default class TabOneScreen extends React.Component {
+export default function TabOneScreen() {
+  const [billAmount, setBillAmount] = useState(0);
+  const [tipPct, setTipPct] = useState(15);
+  const [numberOfPeople, setNumberOfPeople] = useState(1);
 
-  public state: DataState;
+  const handleBillAmountChange = (text: string) => {
+    const value = parseFloat(text);
+    setBillAmount(isNaN(value) ? 0 : value);
+  };
 
-  constructor(props: any) {
-    super(props);
+  const handleTipPctChange = (text: string) => {
+    const value = parseFloat(text);
+    setTipPct(isNaN(value) ? 0 : value);
+  };
 
-    this.state = {
-      billAmount: 0,
-      tipPct: 15,
-      tipAmount: 0,
-      totalAmount: 0,
-      numberOfPeople: 1,
-      eachPersonPays: 0
-    }
-  }
+  const handleNumberOfPeopleChange = (text: string) => {
+    const value = parseInt(text, 10);
+    setNumberOfPeople(isNaN(value) ? 1 : value);
+  };
 
-  private updateCalculations(inputState: DataState): DataState {
-    const resultState = { ...inputState };
-    resultState.tipAmount = resultState.billAmount * resultState.tipPct / 100;
-    resultState.totalAmount = resultState.billAmount + resultState.tipAmount;
-    resultState.eachPersonPays = resultState.totalAmount / resultState.numberOfPeople;
-    return resultState;
-  }
+  const { tipAmount, totalAmount, eachPersonPays } = useMemo(() => {
+    const tip = billAmount * (tipPct / 100);
+    const total = billAmount + tip;
+    const perPerson = numberOfPeople >= 1 ? total / numberOfPeople : 0;
+    return {
+      tipAmount: tip.toFixed(2),
+      totalAmount: total.toFixed(2),
+      eachPersonPays: perPerson.toFixed(2),
+    };
+  }, [billAmount, tipPct, numberOfPeople]);
 
-  private updateBillAmount(amount: string) {
-    const newState = { ... this.state };
-    let input = parseFloat(amount);
-    if (isNaN(input)) input = 0;
-    if (input >= 0) {
-      newState.billAmount = input;
-      this.setState(this.updateCalculations(newState));
-    }
-  }
-
-  private updateTipPct(tipPct: string) {
-    const newState = { ... this.state };
-    let input = parseFloat(tipPct);
-    if (isNaN(input)) input = 0;
-    if (input >= 0 && input <= 40) {
-      newState.tipPct = input;
-      this.setState(this.updateCalculations(newState));
-    }
-  }
-
-  private updateNumPeople(numPeople: string) {
-    const newState = { ... this.state };
-    let input = parseInt(numPeople);
-    if (isNaN(input)) input = 0;
-    if (input >= 0 && input < 40) {
-      newState.numberOfPeople = input;
-      this.setState(this.updateCalculations(newState));
-    }
-  }
-
-  render() {
-    return (
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <Center>
-        <VStack space={4} alignItems="center" width={0.95} height="100%">
-          <Heading size="md" margin={3}>
-            Tip
-          </Heading>
-
-          <VStack space={4} alignItems="center">
-            <HStack space={3}>
-              <Center flex={1} rounded="lg" borderWidth="1px" borderColor="grey">
-                <Text fontSize="lg" margin={1}>Bill Amount</Text>
-                <Input 
-                  margin={1}
-                  variant="rounded"
+  return (
+    <Pressable onPress={Keyboard.dismiss} flex={1}>
+      <Box p="$4" flex={1}>
+        <VStack style={{ gap: 10 }}>
+          <Heading>Tip</Heading>
+          <HStack style={{ gap: 10 }}>
+            <VStack flex={1} style={{ gap: 5 }}>
+              <Text>Bill Amount</Text>
+              <Input size="md">
+                <InputField
                   keyboardType="numeric"
-                  InputLeftElement={
-                    <Icon
-                      as={<MaterialIcons name="receipt-long" />}
-                      size="md"
-                      _light={{
-                        color: "black",
-                      }}
-                      _dark={{
-                        color: "gray.300",
-                      }}
-                    />
-                  }
-                  size="xl"
-                  onChangeText={(text) => this.updateBillAmount(text)} 
-                  value={String(this.state.billAmount)}
+                  value={String(billAmount)}
+                  onChangeText={handleBillAmountChange}
+                  placeholder="0.00"
                 />
-              </Center>
-              <Center flex={1} rounded="lg" borderWidth="1px" borderColor="grey">
-                <Text fontSize="lg" margin={1}>Tip Percent</Text>
-                <Input 
-                  margin={1}
-                  variant="rounded"
+              </Input>
+            </VStack>
+            <VStack flex={1} style={{ gap: 5 }}>
+              <Text>Tip Percent</Text>
+              <Input size="md">
+                <InputField
                   keyboardType="numeric"
-                  InputLeftElement={
-                    <Text fontSize="3xl" bold={true} marginLeft={1}>%</Text>
-                  }
-                  placeholder="Input" // mx={4}
-                  _light={{
-                    placeholderTextColor: "blueGray.400",
-                  }}
-                  _dark={{
-                    placeholderTextColor: "blueGray.50",
-                  }}
-                  size="xl"
-                  onChangeText={(text) => this.updateTipPct(text)} 
-                  value={String(this.state.tipPct)}
+                  value={String(tipPct)}
+                  onChangeText={handleTipPctChange}
+                  placeholder="15"
                 />
-              </Center>
-            </HStack>
-            <HStack space={3}>
-              <Center flex={1} rounded="lg" borderWidth="1px" borderColor="grey">
-                <Text fontSize="lg" margin={1}>Tip Amount</Text>
-                <Input 
-                  margin={1}
-                  variant="rounded"
-                  isReadOnly={true}
-                  InputLeftElement={
-                    <Icon
-                      as={<MaterialIcons name="redeem" />}
-                      size="md"
-                      _light={{
-                        color: "black",
-                      }}
-                      _dark={{
-                        color: "gray.300",
-                      }}
-                    />
-                  }
-                  _light={{
-                    placeholderTextColor: "blueGray.400",
-                  }}
-                  _dark={{
-                    placeholderTextColor: "blueGray.50",
-                  }}
-                  size="xl"
-                  value={String(this.state.tipAmount)}
-                />
-              </Center>
-              <Center flex={1} rounded="lg" borderWidth="1px" borderColor="grey">
-                <Text fontSize="lg" margin={1}>Total Amount</Text>
-                <Input 
-                  margin={1}
-                  variant="rounded"
-                  isReadOnly={true}
-                  InputLeftElement={
-                    <Icon
-                      as={<MaterialIcons name="attach-money" />}
-                      size="md"
-                      m={2}
-                      _light={{
-                        color: "black",
-                      }}
-                      _dark={{
-                        color: "gray.300",
-                      }}
-                    />
-                  }
-                  placeholder="Input" // mx={4}
-                  _light={{
-                    placeholderTextColor: "blueGray.400",
-                  }}
-                  _dark={{
-                    placeholderTextColor: "blueGray.50",
-                  }}
-                  size="xl"
-                  value={String(this.state.totalAmount)}
-                />
-              </Center>
-            </HStack>
-          </VStack>
+              </Input>
+            </VStack>
+          </HStack>
+          <HStack style={{ gap: 10 }}>
+            <VStack flex={1} style={{ gap: 5 }}>
+              <Text>Tip Amount</Text>
+              <Input isReadOnly size="md">
+                <InputField value={String(tipAmount)} />
+              </Input>
+            </VStack>
+            <VStack flex={1} style={{ gap: 5 }}>
+              <Text>Total Amount</Text>
+              <Input isReadOnly size="md">
+                <InputField value={String(totalAmount)} />
+              </Input>
+            </VStack>
+          </HStack>
 
-          <Heading size="md" margin={3}>
-            Split
-          </Heading>
-
-          <VStack space={4} alignItems="center">
-            <HStack space={3}>
-              <Center flex={1} rounded="lg" borderWidth="1px" borderColor="grey">
-                <Text fontSize="lg" margin={1}>No. of People</Text>
-                <Input
-                  margin={1}
-                  variant="rounded"
+          <Heading mt="$4">Split</Heading>
+          <HStack style={{ gap: 10 }}>
+            <VStack flex={1} style={{ gap: 5 }}>
+              <Text>No. of People</Text>
+              <Input size="md">
+                <InputField
                   keyboardType="numeric"
-                  InputLeftElement={
-                    <Icon
-                      as={<MaterialIcons name="people" />}
-                      size="md"
-                      m={2}
-                      _light={{
-                        color: "black",
-                      }}
-                      _dark={{
-                        color: "gray.300",
-                      }}
-                    />
-                  }
-                  placeholder="Input" // mx={4}
-                  _light={{
-                    placeholderTextColor: "blueGray.400",
-                  }}
-                  _dark={{
-                    placeholderTextColor: "blueGray.50",
-                  }}
-                  size="xl"
-                  onChangeText={(text) => this.updateNumPeople(text)}
-                  value={String(this.state.numberOfPeople)}
+                  value={String(numberOfPeople)}
+                  onChangeText={handleNumberOfPeopleChange}
+                  placeholder="1"
                 />
-              </Center>
-              <Center flex={1} rounded="lg" borderWidth="1px" borderColor="grey">
-                <Text fontSize="lg" margin={1}>Each Person Pays</Text>
-                <Input
-                  margin={1}
-                  variant="rounded"
-                  isReadOnly={true}
-                  InputLeftElement={
-                    <Icon
-                      as={<MaterialIcons name="person" />}
-                      size="md"
-                      m={2}
-                      _light={{
-                        color: "black",
-                      }}
-                      _dark={{
-                        color: "gray.300",
-                      }}
-                    />
-                  }
-                  placeholder="Input" // mx={4}
-                  _light={{
-                    placeholderTextColor: "blueGray.400",
-                  }}
-                  _dark={{
-                    placeholderTextColor: "blueGray.50",
-                  }}
-                  size="xl"
-                  value={String(this.state.eachPersonPays)}
-                />
-              </Center>
-            </HStack>
-
-          </VStack>
-
+              </Input>
+            </VStack>
+            <VStack flex={1} style={{ gap: 5 }}>
+              <Text>Each Person Pays</Text>
+              <Input isReadOnly size="md">
+                <InputField value={String(eachPersonPays)} />
+              </Input>
+            </VStack>
+          </HStack>
         </VStack>
-      </Center>
-      </TouchableWithoutFeedback>
-    );
-  }
-
+      </Box>
+    </Pressable>
+  );
 }
-
-export type DataState = {
-  billAmount: number;
-  tipPct: number;
-  tipAmount: number;
-  totalAmount: number;
-  numberOfPeople: number;
-  eachPersonPays: number;
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: "flex-start",
-    // borderColor: 'black',
-    // borderWidth: 2,
-    margin: 10
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-  inputCol: {
-    borderWidth: 1,
-    width: '50%',
-    // borderColor: 'red'
-  },
-  strLabel: {
-    fontSize: 25
-  },
-  strValue: {
-    fontSize: 25,
-    textAlign: "right"
-  },
-  rowContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: "flex-start",
-    flexDirection: "row",
-    marginHorizontal: 50,
-    width: '100%'
-  },
-  labelCol: {
-    borderWidth: 1,
-    width: '50%',
-    alignItems: "flex-start"
-  }
-});

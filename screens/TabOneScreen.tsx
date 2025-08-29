@@ -36,7 +36,7 @@ export default function TabOneScreen() {
   const { tipAmount, totalAmount, eachPersonPays } = useMemo(() => {
     const tip = billAmount * (tipPct / 100);
     const total = billAmount + tip;
-    const perPerson = numberOfPeople > 0 ? total / numberOfPeople : 0;
+    const perPerson = numberOfPeople >= 1 ? total / numberOfPeople : 0;
     return {
       tipAmount: tip.toFixed(2),
       totalAmount: total.toFixed(2),

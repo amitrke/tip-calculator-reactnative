@@ -5,4 +5,4 @@ This is a React Native (Expo) project.
 - To build the project, run: `pnpm run build`.
 - To run tests, use: `pnpm test`.
 
-**Important:** The `Archive` directory contains a previous version of this project. Do not make any changes to the files within the `Archive` directory.
+**Important:** The `.archive` directory contains a previous version of this project. Do not make any changes to the files within the `.archive` directory.

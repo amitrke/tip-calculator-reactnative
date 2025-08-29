@@ -1,1 +1,55 @@
 theme: jekyll-theme-cayman
+title: "Easy Tip and Split Calculator - Documentation"
+description: "Technical documentation and development guide for the Easy Tip and Split Calculator React Native app"
+url: "https://amitrke.github.io"
+baseurl: "/tip-calculator-reactnative"
+repository: amitrke/tip-calculator-reactnative
+
+# Site settings
+author: Amit
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:name/
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .bundle/
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - .vscode/
+
+# Include files
+include:
+  - _pages
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+  - scope:
+      path: "docs"
+    values:
+      layout: page
+      permalink: /docs/:basename/
+
+# Custom variables
+logo: /assets/images/icon.png
+social:
+  github: amitrke
+  linkedin: your-linkedin

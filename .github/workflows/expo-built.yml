@@ -17,6 +17,10 @@ jobs:
           node-version: 18
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm exec expo login --token ${{ secrets.EXPO_TOKEN }}
       - run: pnpm test
-      - run: pnpm exec expo publish
+      - name: Authenticate and publish to Expo
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: |
+          pnpm exec expo whoami
+          pnpm exec expo publish

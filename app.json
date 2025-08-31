@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "Easy Tip and Split Calculator",
+    "slug": "tip-calculator-reactnative",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,6 +24,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "bd8b5d3d-d669-4f62-b55d-94c1cd0980e8"
+      }
+    },
+    "owner": "amitrke"
   }
 }

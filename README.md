@@ -1,33 +1,34 @@
-# Tip Calculator App
+# Tip Calculator React Native App
 
-<a href='https://play.google.com/store/apps/details?id=com.subnext.tipcalcbillsplit&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width=200 alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
-<a href="https://apps.apple.com/us/app/easy-tip-and-split-calculator/id1576452022"><img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-example-preferred.png"></a>
+This is a React Native application built with Expo that functions as a tip calculator. It also provides information about tipping etiquette in different countries.
 
-[![runs with Expo Go](https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000)](https://expo.dev/@amitrke/tip-calculator-reactnative)
-![Build](https://github.com/amitrke/tip-calculator-reactnative/actions/workflows/expo-built.yml/badge.svg)
-![Publish](https://github.com/amitrke/tip-calculator-reactnative/actions/workflows/expo-publish.yml/badge.svg)
+## Features
 
+*   **Tip Calculator:**
+    *   Calculate the tip amount based on the bill amount and tip percentage.
+    *   Calculate the total amount (bill + tip).
+    *   Split the bill among a number of people and calculate the amount each person pays.
+*   **Tipping Etiquette:**
+    *   Provides information about tipping customs in the United States, United Kingdom, and Australia.
 
-[![devDependencies Status](https://david-dm.org/amitrke/tip-calculator-reactnative/dev-status.svg)](https://david-dm.org/amitrke/tip-calculator-reactnative?type=dev)
-[![Dependencies Status](https://david-dm.org/amitrke/tip-calculator-reactnative/status.svg)](https://david-dm.org/amitrke/tip-calculator-reactnative)
+## Tech Stack
 
-[Expo Project page](https://expo.dev/@amitrke/tip-calculator-reactnative)
+*   React Native
+*   Expo
+*   TypeScript
+*   NativeBase for UI components
+*   React Navigation for navigation
 
-[Android PlayStore Test URL](https://play.google.com/apps/internaltest/4699401688780736937)
+## App Structure
 
+The app has a tab-based navigation with two tabs:
 
-[Lessons Learned](https://amitrke.github.io/tip-calculator-reactnative/)
+*   **Calculator:** This is the main screen of the app where the user can perform tip calculations.
+*   **Etiquette:** This screen provides information about tipping etiquette.
 
-[Conventional Commits Specification](https://www.conventionalcommits.org/en/v1.0.0/) to be followed in this repository.
+## How to Run the App
 
-### Build using Expo
+1.  Install dependencies: `pnpm install`
+2.  Start the app: `pnpm start`
 
-expo build:ios
-
-expo build:android
-
-### Updating dependencies
-```
-$npm i -g expo-cli
-$expo upgrade
-```
+This will open the Expo developer tools in your browser. You can then run the app on an Android or iOS simulator, or on a physical device using the Expo Go app.

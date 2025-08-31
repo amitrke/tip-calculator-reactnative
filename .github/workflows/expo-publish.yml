@@ -1,43 +1,35 @@
 name: Expo Publish
+
 on:
-  pull_request:
+  push:
     branches:
       - main
-    types: [closed]
+
 jobs:
-  publish:
-    name: Install and publish
+  install-and-publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
         with:
           version: 8
-      - uses: actions/setup-node@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 18.x
           cache: 'pnpm'
-      - uses: expo/expo-github-action@v8
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Setup Expo
+        uses: expo/expo-github-action@v8
         with:
-          expo-version: 5.x
           token: ${{ secrets.EXPO_TOKEN }}
-      - uses: fregante/setup-git-user@v2
-      - name: Cache pnpm modules
-        uses: actions/cache@v3
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-
-      - run: pnpm install
-      - name: Install release-it
-        run: pnpm add release-it
-      - run: pnpm release-it --ci --minor
-      - run: expo build:android --no-wait
-      - run: expo build:ios --no-wait
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GIT_TOKEN }}
-          branch: ${{ github.ref }}
-          tags: true
+
+      - name: Publish to Expo
+        run: npx expo export --platform android,ios

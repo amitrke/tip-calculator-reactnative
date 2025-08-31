@@ -4,5 +4,3 @@ This is a React Native (Expo) project.
 - After making code changes, run the linter: `pnpm run lint`.
 - To build the project, run: `pnpm run build`.
 - To run tests, use: `pnpm test`.
-
-**Important:** The `.archive` directory contains a previous version of this project. Do not make any changes to the files within the `.archive` directory.

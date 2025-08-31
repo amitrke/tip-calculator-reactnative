@@ -8,106 +8,148 @@ import {
   InputField,
   Text,
   Box,
+  Pressable,
+  Button,
+  ButtonText,
+  Slider,
+  SliderTrack,
+  SliderFilledTrack,
+  SliderThumb,
   Icon,
-  Pressable
+  Divider,
 } from '@gluestack-ui/themed';
-import { MaterialIcons } from '@expo/vector-icons';
+import { Plus, Minus, RotateCw } from 'lucide-react-native';
+
+const TIP_PERCENTAGES = [10, 15, 20, 25];
 
 export default function TabOneScreen() {
-  const [billAmount, setBillAmount] = useState(0);
+  const [billAmount, setBillAmount] = useState('');
   const [tipPct, setTipPct] = useState(15);
   const [numberOfPeople, setNumberOfPeople] = useState(1);
 
-  const handleBillAmountChange = (text: string) => {
-    const value = parseFloat(text);
-    setBillAmount(isNaN(value) ? 0 : value);
-  };
+  const bill = parseFloat(billAmount) || 0;
 
-  const handleTipPctChange = (text: string) => {
-    const value = parseFloat(text);
-    setTipPct(isNaN(value) ? 0 : value);
-  };
-
-  const handleNumberOfPeopleChange = (text: string) => {
-    const value = parseInt(text, 10);
-    setNumberOfPeople(isNaN(value) ? 1 : value);
+  const handleReset = () => {
+    setBillAmount('');
+    setTipPct(15);
+    setNumberOfPeople(1);
+    Keyboard.dismiss();
   };
 
   const { tipAmount, totalAmount, eachPersonPays } = useMemo(() => {
-    const tip = billAmount * (tipPct / 100);
-    const total = billAmount + tip;
-    const perPerson = numberOfPeople >= 1 ? total / numberOfPeople : 0;
+    const tip = bill * (tipPct / 100);
+    const total = bill + tip;
+    const perPerson = numberOfPeople > 0 ? total / numberOfPeople : 0;
     return {
       tipAmount: tip.toFixed(2),
       totalAmount: total.toFixed(2),
       eachPersonPays: perPerson.toFixed(2),
     };
-  }, [billAmount, tipPct, numberOfPeople]);
+  }, [bill, tipPct, numberOfPeople]);
 
   return (
     <Pressable onPress={Keyboard.dismiss} flex={1}>
-      <Box p="$4" flex={1}>
-        <VStack style={{ gap: 10 }}>
-          <Heading>Tip</Heading>
-          <HStack style={{ gap: 10 }}>
-            <VStack flex={1} style={{ gap: 5 }}>
-              <Text>Bill Amount</Text>
-              <Input size="md">
-                <InputField
-                  keyboardType="numeric"
-                  value={String(billAmount)}
-                  onChangeText={handleBillAmountChange}
-                  placeholder="0.00"
-                />
-              </Input>
-            </VStack>
-            <VStack flex={1} style={{ gap: 5 }}>
-              <Text>Tip Percent</Text>
-              <Input size="md">
-                <InputField
-                  keyboardType="numeric"
-                  value={String(tipPct)}
-                  onChangeText={handleTipPctChange}
-                  placeholder="15"
-                />
-              </Input>
-            </VStack>
-          </HStack>
-          <HStack style={{ gap: 10 }}>
-            <VStack flex={1} style={{ gap: 5 }}>
-              <Text>Tip Amount</Text>
-              <Input isReadOnly size="md">
-                <InputField value={String(tipAmount)} />
-              </Input>
-            </VStack>
-            <VStack flex={1} style={{ gap: 5 }}>
-              <Text>Total Amount</Text>
-              <Input isReadOnly size="md">
-                <InputField value={String(totalAmount)} />
-              </Input>
-            </VStack>
-          </HStack>
+      <Box p="$4" flex={1} bg="$backgroundLight50">
+        <VStack space="md">
+          {/* Bill and Tip Card */}
+          <Box bg="$backgroundLight0" p="$4" borderRadius="$lg">
+            <VStack space="lg">
+              <HStack justifyContent="space-between" alignItems="center">
+                <Heading>Bill & Tip</Heading>
+                <Button variant="link" onPress={handleReset}>
+                  <Icon as={RotateCw} />
+                </Button>
+              </HStack>
 
-          <Heading mt="$4">Split</Heading>
-          <HStack style={{ gap: 10 }}>
-            <VStack flex={1} style={{ gap: 5 }}>
-              <Text>No. of People</Text>
-              <Input size="md">
-                <InputField
-                  keyboardType="numeric"
-                  value={String(numberOfPeople)}
-                  onChangeText={handleNumberOfPeopleChange}
-                  placeholder="1"
-                />
-              </Input>
+              <VStack space="xs">
+                <Text>Bill Amount</Text>
+                <Input>
+                  <InputField
+                    keyboardType="numeric"
+                    value={billAmount}
+                    onChangeText={setBillAmount}
+                    placeholder="0.00"
+                    fontSize="$lg"
+                  />
+                </Input>
+              </VStack>
+
+              <VStack space="sm">
+                <Text>Select Tip %</Text>
+                <HStack space="sm" justifyContent="space-between">
+                  {TIP_PERCENTAGES.map((pct) => (
+                    <Button
+                      key={pct}
+                      variant={tipPct === pct ? 'solid' : 'outline'}
+                      onPress={() => setTipPct(pct)}
+                      flex={1}
+                    >
+                      <ButtonText>{pct}%</ButtonText>
+                    </Button>
+                  ))}
+                </HStack>
+                <Slider
+                  value={tipPct}
+                  minValue={0}
+                  maxValue={50}
+                  onChange={(value) => setTipPct(Math.round(value))}
+                  step={1}
+                  mt="$2"
+                >
+                  <SliderTrack>
+                    <SliderFilledTrack />
+                  </SliderTrack>
+                  <SliderThumb />
+                </Slider>
+                <Text textAlign="center" mt="$1">
+                  {tipPct}%
+                </Text>
+              </VStack>
+
+              <Divider my="$2" />
+
+              <HStack justifyContent="space-between">
+                <VStack>
+                  <Text>Tip Amount</Text>
+                  <Heading>${tipAmount}</Heading>
+                </VStack>
+                <VStack alignItems="flex-end">
+                  <Text>Total Amount</Text>
+                  <Heading>${totalAmount}</Heading>
+                </VStack>
+              </HStack>
             </VStack>
-            <VStack flex={1} style={{ gap: 5 }}>
-              <Text>Each Person Pays</Text>
-              <Input isReadOnly size="md">
-                <InputField value={String(eachPersonPays)} />
-              </Input>
+          </Box>
+
+          {/* Split Card */}
+          <Box bg="$backgroundLight0" p="$4" borderRadius="$lg">
+            <VStack space="lg">
+              <Heading>Split</Heading>
+              <HStack justifyContent="space-between" alignItems="center">
+                <Text size="xl">No. of People</Text>
+                <HStack space="md" alignItems="center">
+                  <Button
+                    size="lg"
+                    onPress={() => setNumberOfPeople((n) => Math.max(1, n - 1))}
+                    isDisabled={numberOfPeople <= 1}
+                  >
+                    <Icon as={Minus} />
+                  </Button>
+                  <Text size="xl" w="$12" textAlign="center">
+                    {numberOfPeople}
+                  </Text>
+                  <Button size="lg" onPress={() => setNumberOfPeople((n) => n + 1)}>
+                    <Icon as={Plus} />
+                  </Button>
+                </HStack>
+              </HStack>
+              <Divider my="$2" />
+              <HStack justifyContent="space-between" alignItems="center">
+                <Text size="xl">Each Person Pays</Text>
+                <Heading>${eachPersonPays}</Heading>
+              </HStack>
             </VStack>
-          </HStack>
+          </Box>
         </VStack>
       </Box>
     </Pressable>

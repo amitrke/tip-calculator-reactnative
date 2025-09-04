@@ -13,14 +13,19 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.subnext.tipcalcbillsplit",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.subnext.tipcalcbillsplit"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,6 +35,9 @@
         "projectId": "bd8b5d3d-d669-4f62-b55d-94c1cd0980e8"
       }
     },
-    "owner": "amitrke"
+    "owner": "amitrke",
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

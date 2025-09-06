@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
+import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -22,6 +23,13 @@ export default function BottomTabNavigator() {
         component={TabTwoNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Privacy"
+        component={PrivacyNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="shield-checkmark" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -57,5 +65,19 @@ function TabTwoNavigator() {
         options={{ headerTitle: 'Tipping Etiquette' }}
       />
     </TabTwoStack.Navigator>
+  );
+}
+
+const PrivacyStack = createStackNavigator();
+
+function PrivacyNavigator() {
+  return (
+    <PrivacyStack.Navigator>
+      <PrivacyStack.Screen
+        name="PrivacyPolicyScreen"
+        component={PrivacyPolicyScreen}
+        options={{ headerTitle: 'Privacy Policy' }}
+      />
+    </PrivacyStack.Navigator>
   );
 }

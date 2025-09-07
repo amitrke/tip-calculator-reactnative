@@ -70,6 +70,7 @@ export default function TabOneScreen() {
                     onChangeText={setBillAmount}
                     placeholder="0.00"
                     fontSize="$lg"
+                    accessibilityLabel="Bill Amount"
                   />
                 </Input>
               </VStack>
@@ -83,6 +84,7 @@ export default function TabOneScreen() {
                       variant={tipPct === pct ? 'solid' : 'outline'}
                       onPress={() => setTipPct(pct)}
                       flex={1}
+                      accessibilityLabel={`${pct}%`}
                     >
                       <ButtonText>{pct}%</ButtonText>
                     </Button>
@@ -92,7 +94,7 @@ export default function TabOneScreen() {
                   value={tipPct}
                   minValue={0}
                   maxValue={50}
-                  onChange={(value) => setTipPct(Math.round(value))}
+                  onChange={(value: number) => setTipPct(Math.round(value))}
                   step={1}
                   mt="$2"
                 >
@@ -132,13 +134,14 @@ export default function TabOneScreen() {
                     size="lg"
                     onPress={() => setNumberOfPeople((n) => Math.max(1, n - 1))}
                     isDisabled={numberOfPeople <= 1}
+                    accessibilityLabel="Minus"
                   >
                     <Icon as={Minus} />
                   </Button>
                   <Text size="xl" w="$12" textAlign="center">
                     {numberOfPeople}
                   </Text>
-                  <Button size="lg" onPress={() => setNumberOfPeople((n) => n + 1)}>
+                  <Button size="lg" onPress={() => setNumberOfPeople((n) => n + 1)} accessibilityLabel="Plus">
                     <Icon as={Plus} />
                   </Button>
                 </HStack>

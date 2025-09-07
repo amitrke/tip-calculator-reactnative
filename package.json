@@ -8,7 +8,19 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "release-it": "release-it",
-    "test": "echo \"No tests specified\" && exit 0"
+    "test": "echo \"No tests specified\" && exit 0",
+    "maestro:test": "./maestro/run_maestro_tests.sh",
+    "maestro:test:android": "./maestro/run_maestro_tests.sh android",
+    "maestro:test:ios": "./maestro/run_maestro_tests.sh ios",
+    "maestro:screenshots": "maestro test maestro/ --test-output-dir maestro/screenshots",
+    "screenshots": "maestro test maestro/ --test-output-dir maestro/screenshots",
+    "organize:screenshots": "./organize_screenshots.sh",
+    "build:android:local": "eas build -p android --profile preview --local",
+    "build:android:cloud": "eas build -p android --profile production",
+    "build:ios:local": "eas build -p ios --profile preview --local",
+    "build:ios:cloud": "eas build -p ios --profile production",
+    "build:all:local": "npm run build:android:local && npm run build:ios:local",
+    "build:all:cloud": "npm run build:android:cloud && npm run build:ios:cloud"
   },
   "dependencies": {
     "@expo/metro-runtime": "~5.0.4",

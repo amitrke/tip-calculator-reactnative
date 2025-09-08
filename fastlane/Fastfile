@@ -4,11 +4,10 @@ default_platform(:android)
 platform :android do
   desc "Upload screenshots to Google Play Store"
   lane :upload_screenshots do
-    # Upload screenshots to Google Play Store
-    upload_to_play_store(
+    # Upload screenshots to Google Play Store using supply
+    supply(
       package_name: "com.subnext.tipcalcbillsplit",
       json_key: ENV["GOOGLE_PLAY_JSON_KEY_FILE"],
-      screenshots_path: "./maestro/screenshots/screenshots",
       skip_upload_apk: true,
       skip_upload_aab: true,
       skip_upload_metadata: true,
@@ -27,11 +26,10 @@ platform :android do
       track: "internal" # or "alpha", "beta", "production"
     )
 
-    # Upload screenshots
-    upload_to_play_store(
+    # Upload screenshots using supply
+    supply(
       package_name: "com.subnext.tipcalcbillsplit",
       json_key: ENV["GOOGLE_PLAY_JSON_KEY_FILE"],
-      screenshots_path: "./maestro/screenshots/screenshots",
       skip_upload_apk: true,
       skip_upload_aab: true,
       skip_upload_metadata: true,

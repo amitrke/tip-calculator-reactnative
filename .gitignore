@@ -42,3 +42,7 @@ yarn-error.*
 maestro/screenshots/
 *.apk
 *.aab
+
+# Fastlane
+fastlane/report.xml
+fastlane/metadata/

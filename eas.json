@@ -14,15 +14,11 @@
     "preview": {
       "distribution": "internal",
       "ios": {
-        "simulator": false,
-        "bundleIdentifier": "com.subnext.tipcalcbillsplit"
+        "simulator": false
       }
     },
     "production": {
-      "autoIncrement": true,
-      "ios": {
-        "bundleIdentifier": "com.subnext.tipcalcbillsplit"
-      }
+      "autoIncrement": true
     }
   },
   "submit": {

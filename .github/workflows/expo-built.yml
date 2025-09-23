@@ -18,7 +18,7 @@ jobs:
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
-  - run: yarn install
-  - run: yarn test
+      - run: yarn install
+      - run: yarn test
       - name: Publish update
         run: eas update --auto --non-interactive

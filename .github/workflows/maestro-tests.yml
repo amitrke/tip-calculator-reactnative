@@ -1,0 +1,49 @@
+name: Maestro Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  maestro-test:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'yarn'
+
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Install Maestro
+      run: |
+        curl -Ls "https://get.maestro.mobile.dev" | bash
+        echo "$HOME/.maestro/bin" >> $GITHUB_PATH
+
+
+    - name: Build Android app
+      run: |
+        yarn global add eas-cli
+        eas login --access-token ${{ secrets.EXPO_TOKEN }}
+        eas build -p android --profile production --non-interactive
+
+    - name: Run Maestro tests
+      run: |
+        maestro test maestro/ --platform android
+      continue-on-error: true
+
+    - name: Upload screenshots
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: maestro-screenshots
+        path: maestro/screenshots/

@@ -1,0 +1,55 @@
+# Fastfile for Google Play Store uploads
+default_platform(:android)
+
+platform :android do
+  desc "Upload screenshots to Google Play Store"
+  lane :upload_screenshots do
+    # Upload screenshots to Google Play Store using supply
+    supply(
+      package_name: "com.subnext.tipcalcbillsplit",
+      json_key: ENV["GOOGLE_PLAY_JSON_KEY_FILE"],
+      skip_upload_apk: true,
+      skip_upload_aab: true,
+      skip_upload_metadata: true,
+      skip_upload_changelogs: true,
+      skip_upload_images: true
+    )
+  end
+
+  desc "Upload APK and screenshots to Google Play Store"
+  lane :upload_all do
+    # Upload APK/AAB
+    upload_to_play_store(
+      package_name: "com.subnext.tipcalcbillsplit",
+      json_key: ENV["GOOGLE_PLAY_JSON_KEY_FILE"],
+      apk: "./build-*.apk",
+      track: "internal" # or "alpha", "beta", "production"
+    )
+
+    # Upload screenshots using supply
+    supply(
+      package_name: "com.subnext.tipcalcbillsplit",
+      json_key: ENV["GOOGLE_PLAY_JSON_KEY_FILE"],
+      skip_upload_apk: true,
+      skip_upload_aab: true,
+      skip_upload_metadata: true,
+      skip_upload_changelogs: true,
+      skip_upload_images: true
+    )
+  end
+
+  desc "Build and upload everything"
+  lane :build_and_upload do
+    # Build the app
+    sh("yarn build:android:local")
+
+    # Install on device for testing
+    sh("adb install build-*.apk")
+
+    # Take screenshots
+    sh("yarn screenshots")
+
+    # Upload everything to Play Store
+    upload_all
+  end
+end

@@ -35,3 +35,14 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+/android
+/ios
+
+# Maestro
+maestro/screenshots/
+*.apk
+*.aab
+
+# Fastlane
+fastlane/report.xml
+fastlane/metadata/

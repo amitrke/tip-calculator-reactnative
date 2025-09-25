@@ -15,13 +15,15 @@
       "distribution": "internal",
       "ios": {
         "simulator": false,
-        "bundleIdentifier": "com.subnext.tipcalcbillsplit"
+        "buildConfiguration": "Release",
+        "autoIncrement": true
       }
     },
     "production": {
       "autoIncrement": true,
+      "distribution": "store",
       "ios": {
-        "bundleIdentifier": "com.subnext.tipcalcbillsplit"
+        "buildConfiguration": "Release"
       }
     }
   },

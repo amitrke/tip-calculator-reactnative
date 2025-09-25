@@ -15,6 +15,7 @@ export default function BottomTabNavigator() {
         name="Calculator"
         component={TabOneNavigator}
         options={{
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="calculator" color={color} />,
         }}
       />
@@ -22,6 +23,7 @@ export default function BottomTabNavigator() {
         name="Etiquette"
         component={TabTwoNavigator}
         options={{
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
         }}
       />
@@ -29,6 +31,7 @@ export default function BottomTabNavigator() {
         name="Privacy"
         component={PrivacyNavigator}
         options={{
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="shield-checkmark" color={color} />,
         }}
       />
@@ -48,7 +51,7 @@ function TabOneNavigator() {
       <TabOneStack.Screen
         name="TabOneScreen"
         component={TabOneScreen}
-        options={{ headerTitle: 'Tip Calculator' }}
+        options={{ headerTitle: 'Calculator' }}
       />
     </TabOneStack.Navigator>
   );

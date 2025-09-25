@@ -1,10 +1,12 @@
 import React from 'react';
 import {
   Heading,
+
   Text,
   VStack,
   Box,
   Divider,
+  ScrollView,
 } from '@gluestack-ui/themed';
 
 const TippingInfo = ({ title, text }: { title?: string, text: string }) => (
@@ -34,7 +36,7 @@ const tippingData = [
 
 export default function TabTwoScreen() {
   return (
-    <Box p="$4" flex={1}>
+    <ScrollView p="$4" flex={1}>
       <VStack space="lg">
         {tippingData.map((item, index) => (
           <React.Fragment key={index}>
@@ -43,6 +45,6 @@ export default function TabTwoScreen() {
           </React.Fragment>
         ))}
       </VStack>
-    </Box>
+    </ScrollView>
   );
 }

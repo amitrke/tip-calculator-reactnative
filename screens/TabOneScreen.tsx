@@ -92,7 +92,7 @@ export default function TabOneScreen() {
                     flex={1}
                     accessibilityLabel={`${pct}%`}
                   >
-                    <ButtonText color={tipPct === pct ? '$white' : undefined}>{pct}%</ButtonText>
+                    <ButtonText size="sm" color={tipPct === pct ? '$white' : undefined}>{pct}%</ButtonText>
                   </Button>
                 ))}
               </HStack>

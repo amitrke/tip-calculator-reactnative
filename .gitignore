@@ -46,3 +46,5 @@ maestro/screenshots/
 # Fastlane
 fastlane/report.xml
 fastlane/metadata/
+
+.env

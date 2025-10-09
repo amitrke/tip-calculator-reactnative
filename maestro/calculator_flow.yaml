@@ -1,10 +1,12 @@
 appId: com.subnext.tipcalcbillsplit
 ---
 - launchApp
+- assertVisible: "Calculator"
 - takeScreenshot: calculator-empty
-- tapOn: "Bill Amount"
-- inputText: "100.00"
+- tapOn: "0.00"
+- inputText: "100"
 - hideKeyboard
+- tapOn: "Bill & Tip"
 - takeScreenshot: calculator-bill-entered
 - tapOn: "15%"
 - takeScreenshot: calculator-15-percent
@@ -12,13 +14,7 @@ appId: com.subnext.tipcalcbillsplit
 - takeScreenshot: calculator-20-percent
 - tapOn: "Plus"
 - takeScreenshot: calculator-split-2-people
-- tapOn: "Plus"
-- takeScreenshot: calculator-split-3-people
-- tapOn: "25%"
-- takeScreenshot: calculator-25-percent-3-people
-- tapOn: "Etiquette"
+- tapOn: "Etiquette, tab, 2 of 3"
 - takeScreenshot: etiquette-screen
-- tapOn: "Privacy"
+- tapOn: "Privacy, tab, 3 of 3"
 - takeScreenshot: privacy-screen
-- tapOn: "Calculator"
-- takeScreenshot: calculator-final

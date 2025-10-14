@@ -21,11 +21,12 @@ import {
 } from '@gluestack-ui/themed';
 import { Plus, Minus, RotateCw } from 'lucide-react-native';
 
-const TIP_PERCENTAGES = [10, 15, 20, 25];
+const TIP_PERCENTAGES = [10, 15, 20];
 
 export default function TabOneScreen() {
   const [billAmount, setBillAmount] = useState('');
   const [tipPct, setTipPct] = useState(15);
+  const [sliderValue, setSliderValue] = useState(15);
   const [numberOfPeople, setNumberOfPeople] = useState(1);
 
   const bill = parseFloat(billAmount) || 0;
@@ -33,6 +34,7 @@ export default function TabOneScreen() {
   const handleReset = () => {
     setBillAmount('');
     setTipPct(15);
+    setSliderValue(15);
     setNumberOfPeople(1);
     Keyboard.dismiss();
   };
@@ -88,7 +90,10 @@ export default function TabOneScreen() {
                   <Button
                     key={pct}
                     variant={tipPct === pct ? 'solid' : 'outline'}
-                    onPress={() => setTipPct(pct)}
+                    onPress={() => {
+                      setTipPct(pct);
+                      setSliderValue(pct);
+                    }}
                     flex={1}
                     accessibilityLabel={`${pct}%`}
                   >
@@ -97,12 +102,13 @@ export default function TabOneScreen() {
                 ))}
               </HStack>
               <Slider
-                value={tipPct}
+                value={sliderValue}
                 minValue={0}
                 maxValue={50}
-                onChange={(value: number) => setTipPct(Math.round(value))}
+                onChange={(value: number) => setSliderValue(value)}
+                onChangeEnd={(value: number) => setTipPct(Math.round(value))}
                 step={1}
-                mt="$2"
+                mt="$4"
               >
                 <SliderTrack style={{ height: 8, backgroundColor: '#E0E0E0' }}>
                   <SliderFilledTrack style={{ backgroundColor: '#3B82F6' }} />
@@ -110,7 +116,7 @@ export default function TabOneScreen() {
                 <SliderThumb />
               </Slider>
               <Text textAlign="center" mt="$1">
-                {tipPct}%
+                {Math.round(sliderValue)}%
               </Text>
             </VStack>
 

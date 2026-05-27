@@ -20,10 +20,12 @@ import {
   ScrollView,
 } from '@gluestack-ui/themed';
 import { Plus, Minus, RotateCw } from 'lucide-react-native';
+import { useTextScale } from '../components/TextScaleContext';
 
 const TIP_PERCENTAGES = [10, 15, 20];
 
 export default function TabOneScreen() {
+  const { isLargeText, toggleLargeText, scale } = useTextScale();
   const [billAmount, setBillAmount] = useState('');
   const [tipPct, setTipPct] = useState(15);
   const [sliderValue, setSliderValue] = useState(15);
@@ -63,14 +65,14 @@ export default function TabOneScreen() {
         <Box bg="$backgroundLight0" p="$4" borderRadius="$lg">
           <VStack space="lg">
             <HStack justifyContent="space-between" alignItems="center">
-              <Heading>Bill & Tip</Heading>
+              <Heading style={{ fontSize: scale(24) }}>Bill & Tip</Heading>
               <Button variant="link" onPress={handleReset}>
                 <Icon as={RotateCw} />
               </Button>
             </HStack>
 
             <VStack space="xs">
-              <Text>Bill Amount</Text>
+              <Text style={{ fontSize: scale(16) }}>Bill Amount</Text>
               <Input>
                 <InputField
                   keyboardType="numeric"
@@ -78,13 +80,14 @@ export default function TabOneScreen() {
                   onChangeText={setBillAmount}
                   placeholder="0.00"
                   fontSize="$lg"
+                  style={{ fontSize: scale(18) }}
                   accessibilityLabel="Bill Amount"
                 />
               </Input>
             </VStack>
 
             <VStack space="sm">
-              <Text>Select Tip %</Text>
+              <Text style={{ fontSize: scale(16) }}>Select Tip %</Text>
               <HStack space="sm" justifyContent="space-between">
                 {TIP_PERCENTAGES.map((pct) => (
                   <Button
@@ -97,7 +100,13 @@ export default function TabOneScreen() {
                     flex={1}
                     accessibilityLabel={`${pct}%`}
                   >
-                    <ButtonText size="sm" color={tipPct === pct ? '$white' : undefined}>{pct}%</ButtonText>
+                    <ButtonText
+                      size="sm"
+                      color={tipPct === pct ? '$white' : undefined}
+                      style={{ fontSize: scale(14) }}
+                    >
+                      {pct}%
+                    </ButtonText>
                   </Button>
                 ))}
               </HStack>
@@ -115,7 +124,7 @@ export default function TabOneScreen() {
                 </SliderTrack>
                 <SliderThumb />
               </Slider>
-              <Text textAlign="center" mt="$1">
+              <Text textAlign="center" mt="$1" style={{ fontSize: scale(16) }}>
                 {Math.round(sliderValue)}%
               </Text>
             </VStack>
@@ -124,12 +133,12 @@ export default function TabOneScreen() {
 
             <HStack justifyContent="space-between">
               <VStack>
-                <Text>Tip Amount</Text>
-                <Heading>${tipAmount}</Heading>
+                <Text style={{ fontSize: scale(15) }}>Tip Amount</Text>
+                <Heading style={{ fontSize: scale(28) }}>${tipAmount}</Heading>
               </VStack>
               <VStack alignItems="flex-end">
-                <Text>Total Amount</Text>
-                <Heading>${totalAmount}</Heading>
+                <Text style={{ fontSize: scale(15) }}>Total Amount</Text>
+                <Heading style={{ fontSize: scale(28) }}>${totalAmount}</Heading>
               </VStack>
             </HStack>
           </VStack>
@@ -138,9 +147,9 @@ export default function TabOneScreen() {
         {/* Split Card */}
         <Box bg="$backgroundLight0" p="$4" borderRadius="$lg">
           <VStack space="lg">
-            <Heading>Split</Heading>
+            <Heading style={{ fontSize: scale(24) }}>Split</Heading>
             <HStack justifyContent="space-between" alignItems="center">
-              <Text size="xl">No. of People</Text>
+              <Text size="xl" style={{ fontSize: scale(22) }}>No. of People</Text>
               <HStack space="md" alignItems="center">
                 <Button
                   size="lg"
@@ -150,7 +159,7 @@ export default function TabOneScreen() {
                 >
                   <Icon as={Minus} />
                 </Button>
-                <Text size="xl" w="$12" textAlign="center">
+                <Text size="xl" w="$12" textAlign="center" style={{ fontSize: scale(22) }}>
                   {numberOfPeople}
                 </Text>
                 <Button size="lg" onPress={() => setNumberOfPeople((n) => n + 1)} accessibilityLabel="Plus">
@@ -160,8 +169,27 @@ export default function TabOneScreen() {
             </HStack>
             <Divider my="$2" />
             <HStack justifyContent="space-between" alignItems="center">
-              <Text size="xl">Each Person Pays</Text>
-              <Heading>${eachPersonPays}</Heading>
+              <Text size="xl" style={{ fontSize: scale(22) }}>Each Person Pays</Text>
+              <Heading style={{ fontSize: scale(28) }}>${eachPersonPays}</Heading>
+            </HStack>
+          </VStack>
+        </Box>
+
+        <Box bg="$backgroundLight0" p="$4" borderRadius="$lg">
+          <VStack space="sm">
+            <Heading style={{ fontSize: scale(20) }}>Accessibility</Heading>
+            <Text style={{ fontSize: scale(15) }}>
+              Enable larger text for easier reading across the app.
+            </Text>
+            <HStack justifyContent="space-between" alignItems="center">
+              <Text style={{ fontSize: scale(16) }}>Larger Text</Text>
+              <Button
+                variant={isLargeText ? 'solid' : 'outline'}
+                onPress={toggleLargeText}
+                accessibilityLabel="Toggle larger text"
+              >
+                <ButtonText style={{ fontSize: scale(14) }}>{isLargeText ? 'On' : 'Off'}</ButtonText>
+              </Button>
             </HStack>
           </VStack>
         </Box>

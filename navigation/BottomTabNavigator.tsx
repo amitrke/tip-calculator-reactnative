@@ -5,12 +5,22 @@ import * as React from 'react';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
+import { useTextScale } from '../components/TextScaleContext';
 
 const BottomTab = createBottomTabNavigator();
 
 export default function BottomTabNavigator() {
+  const { scale } = useTextScale();
+
   return (
-    <BottomTab.Navigator initialRouteName="Calculator">
+    <BottomTab.Navigator
+      initialRouteName="Calculator"
+      screenOptions={{
+        tabBarLabelStyle: {
+          fontSize: scale(12),
+        },
+      }}
+    >
       <BottomTab.Screen
         name="Calculator"
         component={TabOneNavigator}
@@ -46,12 +56,14 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']
 const TabOneStack = createStackNavigator();
 
 function TabOneNavigator() {
+  const { scale } = useTextScale();
+
   return (
     <TabOneStack.Navigator>
       <TabOneStack.Screen
         name="TabOneScreen"
         component={TabOneScreen}
-        options={{ headerTitle: 'Calculator' }}
+        options={{ headerTitle: 'Calculator', headerTitleStyle: { fontSize: scale(20) } }}
       />
     </TabOneStack.Navigator>
   );
@@ -60,12 +72,14 @@ function TabOneNavigator() {
 const TabTwoStack = createStackNavigator();
 
 function TabTwoNavigator() {
+  const { scale } = useTextScale();
+
   return (
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
         name="TabTwoScreen"
         component={TabTwoScreen}
-        options={{ headerTitle: 'Tipping Etiquette' }}
+        options={{ headerTitle: 'Tipping Etiquette', headerTitleStyle: { fontSize: scale(20) } }}
       />
     </TabTwoStack.Navigator>
   );
@@ -74,12 +88,14 @@ function TabTwoNavigator() {
 const PrivacyStack = createStackNavigator();
 
 function PrivacyNavigator() {
+  const { scale } = useTextScale();
+
   return (
     <PrivacyStack.Navigator>
       <PrivacyStack.Screen
         name="PrivacyPolicyScreen"
         component={PrivacyPolicyScreen}
-        options={{ headerTitle: 'Privacy Policy' }}
+        options={{ headerTitle: 'Privacy Policy', headerTitleStyle: { fontSize: scale(20) } }}
       />
     </PrivacyStack.Navigator>
   );

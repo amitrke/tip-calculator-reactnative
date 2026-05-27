@@ -1,5 +1,10 @@
 # Tip Calculator React Native App
 
+## Docs
+
+- [Documentation index](docs/index.md)
+- [Upgrading libraries](docs/upgrading-libraries.md)
+
 This is a React Native appli## Automated Testing & Screenshots
 
 ### Maestro (UI Testing & Screenshots)

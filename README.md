@@ -1,5 +1,7 @@
 # Tip Calculator React Native App
 
+Google Playstore Internal Testing: [Link](https://play.google.com/apps/internaltest/4699401688780736937)
+
 ## Docs
 
 - [Documentation index](docs/index.md)

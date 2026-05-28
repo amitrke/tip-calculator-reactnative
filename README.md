@@ -1,6 +1,8 @@
 # Tip Calculator React Native App
 
-Google Playstore Internal Testing: [Link](https://play.google.com/apps/internaltest/4699401688780736937)
+Google Playstore 
+    - Internal Testing: [Link](https://play.google.com/apps/internaltest/4699401688780736937)
+    - Open Testing: [Link](https://play.google.com/store/apps/details?id=com.subnext.tipcalcbillsplit)
 
 ## Docs
 

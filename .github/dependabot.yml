@@ -1,0 +1,41 @@
+version: 2
+updates:
+  # JS dependencies (yarn.lock at the repo root)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "develop"
+    open-pull-requests-limit: 5
+    groups:
+      # Minor/patch bumps arrive as one PR per week instead of many
+      minor-and-patch:
+        update-types: ["minor", "patch"]
+        exclude-patterns:
+          - "expo*"
+          - "react"
+          - "react-dom"
+          - "react-native"
+          - "react-native-*"
+          - "@react-native*"
+          - "@react-navigation/*"
+    ignore:
+      # The Expo SDK pins compatible versions of these. Upgrade them together
+      # with `npx expo install --fix` (see docs/upgrading-libraries.md), not via
+      # individual Dependabot bumps.
+      - dependency-name: "expo"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: "react-native"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+
+  # GitHub Actions used in .github/workflows
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "develop"
+    groups:
+      actions:
+        patterns: ["*"]

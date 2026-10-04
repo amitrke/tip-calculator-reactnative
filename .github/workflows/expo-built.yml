@@ -12,7 +12,7 @@ jobs:
   # pnpm setup removed for yarn
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22
           cache: 'yarn'
       - uses: expo/expo-github-action@v8
         with:

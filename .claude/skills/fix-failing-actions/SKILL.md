@@ -5,10 +5,11 @@ description: Look through the most recent GitHub Actions runs for this repo, dia
 
 # Diagnose and fix failing GitHub Actions runs (Tip Calculator)
 
-Workflows live in `.github/workflows/`: `maestro-tests.yml` (macOS, push/PR to
-`main` and `develop`), `expo-built.yml` (push to `develop`: `yarn test` +
-`eas update`), `expo-publish.yml` (push to `main`: `expo export`), and the
-manual `android-google-play-submit.yml` / `ios-testflight.yml`. The goal is to
+Workflows live in `.github/workflows/`: `ci.yml` (typecheck + `expo export`
+on push/PR to `main` and `develop`), `expo-built.yml` (push to `develop`:
+`eas update` OTA publish), `expo-publish.yml` (push to `main`: `expo export`
+check), and the manual `android-google-play-submit.yml` /
+`ios-testflight.yml`. The goal is to
 find real failures, fix what is fixable from the repo, and clearly report the
 rest.
 
@@ -35,8 +36,7 @@ noise; keep reading to the real error. Classify the cause:
 
 - **Fixable in the repo**: TypeScript/build errors, bundling errors from
   `expo export`, broken workflow YAML, wrong paths/versions/Node version in a
-  workflow, `yarn.lock` out of sync with `package.json`, Maestro flow
-  selectors that no longer match the UI.
+  workflow, `yarn.lock` out of sync with `package.json`.
 - **Dependabot PR broken by the bump itself** (e.g. a major bump with an
   incompatible peer dependency or Expo SDK mismatch): not a repo bug. Report it
   and recommend holding or closing the PR; don't hand-edit Dependabot branches.
@@ -58,8 +58,7 @@ Check out the failing ref and run what the workflow runs:
 
 Read the workflow file for the authoritative commands. Confirm the failure
 reproduces, make the smallest fix, and re-run the same commands to confirm it
-passes. Maestro/emulator failures usually can't be reproduced headlessly; say
-so rather than guessing at a fix.
+passes. If a failure doesn't reproduce locally, say so rather than guessing at a fix.
 
 ## 4. Ship fixes safely
 

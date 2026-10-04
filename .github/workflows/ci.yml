@@ -1,20 +1,21 @@
-name: Expo Export Check (main)
+name: CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
 
 permissions:
   contents: read
 
 concurrency:
-  group: expo-export-main
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  export:
-    name: Export bundles
+  check:
+    name: Typecheck and bundle
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -29,8 +30,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Export Android bundle
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Bundle Android
         run: npx expo export --platform android
 
-      - name: Export iOS bundle
+      - name: Bundle iOS
         run: npx expo export --platform ios

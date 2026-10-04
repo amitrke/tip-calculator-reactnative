@@ -12,9 +12,8 @@ and React Native major/minor bumps ignored (those move together via
 branches it doesn't cover) may still target **`main`**. Policy: **merge
 everything that is not failing the automatic checks that run on PR creation.**
 No confirmation is needed per PR, and bump size is not a reason to hold, except
-as noted in step 4. Merging to `develop` runs Expo Build Test (`eas update`);
-merging to `main` triggers Expo Publish (`expo export` only, no store
-submission).
+as noted in step 4. Merging to `develop` publishes an OTA update (`eas update`);
+merging to `main` runs an export check only (no store submission).
 
 ## 1. List open Dependabot PRs
 

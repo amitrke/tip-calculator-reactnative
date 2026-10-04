@@ -29,7 +29,7 @@ Branch model (see `CLAUDE.md`):
 - Small changes can be committed on `develop`. Larger or risky work → its own
   branch `git checkout -b <type>/<short-kebab-description>` off `develop`, PR
   into `develop`.
-- Release: PR `develop` into `main`. Pushes to `main` run Expo Publish.
+- Release: PR `develop` into `main`. Pushes to `main` run the export check.
 
 So:
 - **On `main`**: stop. Never commit or push here directly — ask the user.
@@ -86,7 +86,7 @@ EOF
 
 ## Repo-specific things worth mentioning
 
-- The Maestro Tests workflow (macOS runner) runs on PRs to `main`/`develop`
-  and is slow; a green TypeScript check locally isn't the same as it passing.
-- Pushes to `develop` run Expo Build Test (`eas update`); pushes to `main` run
-  Expo Publish. Store builds are manual (`workflow_dispatch`).
+- The CI workflow (typecheck + `expo export`) runs on PRs and pushes to
+  `main`/`develop`.
+- Pushes to `develop` publish an OTA update (`eas update`); pushes to `main`
+  run an export check. Store builds are manual (`workflow_dispatch`).

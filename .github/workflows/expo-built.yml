@@ -1,24 +1,39 @@
-name: Expo Build Test
+name: Expo OTA Update (develop)
+
 on:
   push:
     branches:
       - develop
+
+permissions:
+  contents: read
+
+concurrency:
+  group: expo-ota-develop
+  cancel-in-progress: false
+
 jobs:
-  publish:
-    name: Expo Build Test
+  publish-update:
+    name: Publish OTA update
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-  # pnpm setup removed for yarn
-      - uses: actions/setup-node@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: 'yarn'
-      - uses: expo/expo-github-action@v8
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
-      - run: yarn install
-      - run: yarn test
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
       - name: Publish update
         run: eas update --auto --non-interactive

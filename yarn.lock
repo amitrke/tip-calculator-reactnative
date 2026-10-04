@@ -2413,16 +2413,14 @@
     color "^4.2.3"
     sf-symbols-typescript "^2.1.0"
 
-"@react-navigation/core@^7.17.5":
-  version "7.17.5"
-  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-7.17.5.tgz#75ca0815385dc795d9a367c0f3e2be0fa17c0b42"
-  integrity sha512-6fDCwDTWC7DJn0SDb9DJGRlipaygHIc+2elpZBJI6Crl/2Pu+Z1d6W4jMJ2gZO6iHKf+Pe5sUiQ/uwepGprZtg==
+"@react-navigation/core@^7.23.0":
+  version "7.23.0"
+  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-7.23.0.tgz#44bb103f2237331b63cb9f60ed51f2b6ef4495e1"
+  integrity sha512-eqj4kcxdFtaoRih4DxLZnPJt/u8aO/K8I4rwpiTx8qIA+TO3/2mScw3+JOE+FQHt2r++Yib7q0nyp0sNAtBcpQ==
   dependencies:
-    "@react-navigation/routers" "^7.5.5"
+    "@react-navigation/routers" "^7.6.4"
     escape-string-regexp "^4.0.0"
     fast-deep-equal "^3.1.3"
-    nanoid "^3.3.11"
-    query-string "^7.1.3"
     react-is "^19.1.0"
     use-latest-callback "^0.2.4"
     use-sync-external-store "^1.5.0"
@@ -2436,21 +2434,22 @@
     use-latest-callback "^0.2.4"
     use-sync-external-store "^1.5.0"
 
-"@react-navigation/native@7.2.5":
-  version "7.2.5"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-7.2.5.tgz#f98db27148d1c8734ad021b204f117e18255a087"
-  integrity sha512-01AAUQiiHQAfTabq+ZyU1/ZWq+AbB/J3v0CB0UTJSON6M6cuadWNsbChzrZUdqQvHrXvg96U5i2PQLJzK3+zpg==
+"@react-navigation/native@7.5.0":
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-7.5.0.tgz#55b8d98efce1afdffe416a632badbba9c556a7ad"
+  integrity sha512-D4fb1+HWv54re3XgU615pgtdHJa5OsQtypKEbqX10Eopj39tTj4RV/ww9mdzn4X0ZkiHfVos/ysAe5428P0uVA==
   dependencies:
-    "@react-navigation/core" "^7.17.5"
+    "@react-navigation/core" "^7.23.0"
     escape-string-regexp "^4.0.0"
     fast-deep-equal "^3.1.3"
     nanoid "^3.3.11"
+    standard-navigation "^0.0.8"
     use-latest-callback "^0.2.4"
 
-"@react-navigation/routers@^7.5.5":
-  version "7.5.5"
-  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-7.5.5.tgz#04358f1997cc31aa702d01719af274dc123d6025"
-  integrity sha512-9/hhMte12Kgu+pMnLfA4EWJ0OQmIEAMVMX06FPH2yGkEQSQ3JhhCN/GkcRikzQhtEi97VYYQA15umptBUShcOQ==
+"@react-navigation/routers@^7.6.4":
+  version "7.6.4"
+  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-7.6.4.tgz#7b0dfa19f9fef0ab1588c9dbfc7f7616fced3ff8"
+  integrity sha512-GI7eJm8/KsZUQaYcXvEExikKurRZRgEsSzyZ7faENfi65yqJBCXjDMwyN1pF6pNW1MoLH1ErDwDivFxY6BzD3w==
   dependencies:
     nanoid "^3.3.11"
 
@@ -3892,11 +3891,6 @@ decimal.js@^10.4.3:
   resolved "https://registry.yarnpkg.com/decimal.js/-/decimal.js-10.6.0.tgz#e649a43e3ab953a72192ff5983865e509f37ed9a"
   integrity sha512-YpgQiITW3JXGntzdUmyUR1V812Hn8T1YVXhCu+wO3OpS4eU9l4YdD3qjyiKdV6mvV29zapkMeD390UVEf2lkUg==
 
-decode-uri-component@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.2.tgz#e69dbe25d37941171dd540e024c444cd5188e1e9"
-  integrity sha512-FqUYQ+8o158GyGTrMFJms9qh3CqTKvAqgqsTnkLI8sKu0028orqBhxNMFkFen0zGyg6epACD32pjVk58ngIErQ==
-
 deepmerge@^4.3.0, deepmerge@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.3.1.tgz#44b5f2147cd3b00d4b56137685966f26fd25dd4a"
@@ -4293,11 +4287,6 @@ fill-range@^7.1.1:
   integrity sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==
   dependencies:
     to-regex-range "^5.0.1"
-
-filter-obj@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/filter-obj/-/filter-obj-1.1.0.tgz#9b311112bc6c6127a16e016c6c5d7f19e0805c5b"
-  integrity sha512-8rXg1ZnX7xzy2NGDVkBVaAy+lSlPNwad13BtgSlLuxfIslyt5Vg64U7tFcCt4WS1R0hvtnQybT/IyCkGZ3DpXQ==
 
 finalhandler@1.1.2:
   version "1.1.2"
@@ -5691,16 +5680,6 @@ qs@^6.15.2:
     es-define-property "^1.0.1"
     side-channel "^1.1.1"
 
-query-string@^7.1.3:
-  version "7.1.3"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-7.1.3.tgz#a1cf90e994abb113a325804a972d98276fe02328"
-  integrity sha512-hh2WYhq4fi8+b+/2Kg9CEge4fDPvHS534aOOvOZeQ3+Vf2mCFsaFBYj0i+iXcAq6I9Vzp5fjMFBlONvayDC1qg==
-  dependencies:
-    decode-uri-component "^0.2.2"
-    filter-obj "^1.1.0"
-    split-on-first "^1.0.0"
-    strict-uri-encode "^2.0.0"
-
 queue-microtask@^1.2.2:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
@@ -6273,11 +6252,6 @@ source-map@^0.6.0, source-map@^0.6.1:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
-split-on-first@^1.0.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/split-on-first/-/split-on-first-1.1.0.tgz#f610afeee3b12bce1d0c30425e76398b78249a5f"
-  integrity sha512-43ZssAJaMusuKWL8sKUBQXHWOpq8d6CfN/u1p4gUzfJkM05C8rxTmYrkIPTXapZpORA6LkkzcUulJ8FqA7Uudw==
-
 stackframe@^1.3.4:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/stackframe/-/stackframe-1.3.4.tgz#b881a004c8c149a5e8efef37d51b16e412943310"
@@ -6289,6 +6263,11 @@ stacktrace-parser@^0.1.10:
   integrity sha512-WjlahMgHmCJpqzU8bIBy4qtsZdU9lRlcZE3Lvyej6t4tuOuv1vk57OW3MBrj6hXBFx/nNoC9MPMTcr5YA7NQbg==
   dependencies:
     type-fest "^0.7.1"
+
+standard-navigation@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/standard-navigation/-/standard-navigation-0.0.8.tgz#aef79bef130ec8ba0a9c070d3a728d96d68df8a8"
+  integrity sha512-TyVbo7INUDWtsUWDFn8RR7kwR87U0S4xHfLfbbnyeC581TmmyqQ+eM+nPw8rQTSD8QitRVcYfPaSHr/QJiUy1g==
 
 statuses@2.0.1:
   version "2.0.1"
@@ -6309,11 +6288,6 @@ stream-buffers@2.2.x:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/stream-buffers/-/stream-buffers-2.2.0.tgz#91d5f5130d1cef96dcfa7f726945188741d09ee4"
   integrity sha512-uyQK/mx5QjHun80FLJTfaWE7JtwfRMKBLkMne6udYOmvH0CawotVa7TfgYHzAnpphn4+TweIx1QKMnRIbipmUg==
-
-strict-uri-encode@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz#b9c7330c7042862f6b142dc274bbcc5866ce3546"
-  integrity sha512-QwiXZgpRcKkhTj2Scnn++4PKtWsH0kpzZ62L2R6c/LUVYv7hVnZqcg2+sMuT6R7Jusu1vviK/MFsu6kNJfWlEQ==
 
 string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"

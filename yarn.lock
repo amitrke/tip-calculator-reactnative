@@ -2413,10 +2413,10 @@
     use-latest-callback "^0.2.4"
     use-sync-external-store "^1.5.0"
 
-"@react-navigation/elements@^2.9.19":
-  version "2.9.19"
-  resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-2.9.19.tgz#8b9756ce0daab39095c90cd11d85ab41f78ba4f9"
-  integrity sha512-gBUvCZuUkOGw1KpLQEZIkByUz8RYPwXeoA6mZFJy9K1mxd8GdqHDMFCIoB0lfPz9rgrHj99RvtdlGZ/ZzkZv2A==
+"@react-navigation/elements@^2.9.19", "@react-navigation/elements@^2.9.44":
+  version "2.9.44"
+  resolved "https://registry.yarnpkg.com/@react-navigation/elements/-/elements-2.9.44.tgz#b9f093e304cd9463669baa9e98b2c7fa73fd0f4b"
+  integrity sha512-mtngxVeRtB20yPu7AZiNNej0hw5FaKuFtYi3rhsQI2dxQOVgnQh9hi98DxLKrnJDQSiHXa0AX1t/evpywx6UbQ==
   dependencies:
     color "^4.2.3"
     use-latest-callback "^0.2.4"
@@ -2441,12 +2441,12 @@
   dependencies:
     nanoid "^3.3.11"
 
-"@react-navigation/stack@7.9.3":
-  version "7.9.3"
-  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-7.9.3.tgz#f744d528e9d2e01c665d7bda27a6caf3ea850152"
-  integrity sha512-ZFMiyhx48HglkMGASfrEgU8ihvm38PP/Pjne76s9iOGmpJSmxnJtc1mS2O1zD3F2R5vqwE7D4077X7pzA5xqKA==
+"@react-navigation/stack@7.12.0":
+  version "7.12.0"
+  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-7.12.0.tgz#a436272ced73e91b2622a0cb613f3beb29907b8e"
+  integrity sha512-aMKl1+fi/BDu7nlMABrVi8rbaZfThhacV9Iwh4R62vr+rXL6Dp3LuYg0lCrbC35nRUaHHs5WHeFLwshn6x1sEg==
   dependencies:
-    "@react-navigation/elements" "^2.9.19"
+    "@react-navigation/elements" "^2.9.44"
     color "^4.2.3"
     use-latest-callback "^0.2.4"
 

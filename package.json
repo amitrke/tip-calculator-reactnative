@@ -22,7 +22,7 @@
     "build:all:cloud": "npm run build:android:cloud && npm run build:ios:cloud"
   },
   "dependencies": {
-    "@expo/metro-runtime": "~56.0.13",
+    "@expo/metro-runtime": "~58.0.14",
     "@expo/vector-icons": "15.1.1",
     "@gluestack-style/react": "^1.0.57",
     "@gluestack-ui/config": "^1.1.18",

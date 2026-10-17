@@ -962,6 +962,11 @@
   resolved "https://registry.yarnpkg.com/@expo/dom-webview/-/dom-webview-56.0.6.tgz#0ad1b7ca2070a273c16dd751a0071c0678a22df9"
   integrity sha512-DQY3Tj5nrPbpIfEQiD9xbyEFTu25yEORa02Eyzl5rXszDzxDT4VkZDHkyErNQOyE1qjublJHNFhE5bDm4tRfqA==
 
+"@expo/dom-webview@^58.0.2":
+  version "58.0.2"
+  resolved "https://registry.yarnpkg.com/@expo/dom-webview/-/dom-webview-58.0.2.tgz#f90a43ebc4647bb42a40fd4c080c39f1e689e760"
+  integrity sha512-bLkREoP7qL3rEuzxP60xG+TjdPoGjbnZfxkvYo5imJxGWfKMOf7x962W06Pu+WWAr4gcDRk16iA+Clg8D0zjCg==
+
 "@expo/env@^2.3.1":
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/@expo/env/-/env-2.4.3.tgz#cba412d1cf19374bedd83106b32166a12862667c"
@@ -1051,12 +1056,27 @@
     "@expo/config" "~56.0.14"
     chalk "^4.1.2"
 
-"@expo/log-box@^56.0.12", "@expo/log-box@^56.0.14":
+"@expo/log-box-utils@^58.0.2":
+  version "58.0.2"
+  resolved "https://registry.yarnpkg.com/@expo/log-box-utils/-/log-box-utils-58.0.2.tgz#9c6ee08372765020c59723da19cf63295b478049"
+  integrity sha512-My8Lwe9FU/yDwwzqwi5LN2rzzDcJqIAZKrD9f0XHZEKz/FQnWJYdt1rsV7+RwqMGeGq2XsxTCVT1ggTCOvumxw==
+
+"@expo/log-box@^56.0.14":
   version "56.0.14"
   resolved "https://registry.yarnpkg.com/@expo/log-box/-/log-box-56.0.14.tgz#f95ea1c8de5b0ed9674a5dcf852ff06761eeaa11"
   integrity sha512-3Eadcxz0J2NESG2iKe8DnAggsRCWqY0mBLhgQPNzClPVjS6o4NyD0F8kuOvWNngFwpJBC08HhY2o8P1mgSgeJg==
   dependencies:
     "@expo/dom-webview" "^56.0.6"
+    anser "^1.4.9"
+    stacktrace-parser "^0.1.10"
+
+"@expo/log-box@^58.0.12":
+  version "58.0.12"
+  resolved "https://registry.yarnpkg.com/@expo/log-box/-/log-box-58.0.12.tgz#eddb4b3e34484608f5d9d3bc39d410657bafc14d"
+  integrity sha512-IzDYoFY2iUsmSDvl1V7YUM7UkCPDyMVS4e4a38c2LnFc1A3WGMUiQh+vsHLYTPKjIelu4r7/u4V7Gxtfa0oJgA==
+  dependencies:
+    "@expo/dom-webview" "^58.0.2"
+    "@expo/log-box-utils" "^58.0.2"
     anser "^1.4.9"
     stacktrace-parser "^0.1.10"
 
@@ -1101,12 +1121,12 @@
     micromatch "^4.0.4"
     walker "^1.0.8"
 
-"@expo/metro-runtime@~56.0.13":
-  version "56.0.13"
-  resolved "https://registry.yarnpkg.com/@expo/metro-runtime/-/metro-runtime-56.0.13.tgz#95b66e4a527a8f9aac3d807bae8f3ec185df7341"
-  integrity sha512-aMaFa/RPYm2iQoyYOB5q8AxDmWvf4E2yFbZ6rmBIQWaIPDdixGVUlLQeV8DlDAfZ/j+pNYO7l5M+774WbgkTgg==
+"@expo/metro-runtime@~58.0.14":
+  version "58.0.14"
+  resolved "https://registry.yarnpkg.com/@expo/metro-runtime/-/metro-runtime-58.0.14.tgz#4ac796c54b699de5661e8fcee883bdac4f8e4b18"
+  integrity sha512-IIvTo+RpN5jZVuYspQdECsxQ03VGWjZnGS6wtr9U7DERBpykUe+ZSHDZ1hsrvQ7HAucsVoKr9np0xAscGEuXtg==
   dependencies:
-    "@expo/log-box" "^56.0.12"
+    "@expo/log-box" "^58.0.12"
     anser "^1.4.9"
     pretty-format "^29.7.0"
     stacktrace-parser "^0.1.10"

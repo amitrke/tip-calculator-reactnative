@@ -9,11 +9,11 @@ description: Triage open Dependabot pull requests for this repo and automaticall
 (yarn) project and GitHub Actions, targeting **`develop`**, with Expo, React
 and React Native major/minor bumps ignored (those move together via
 `npx expo install --fix`). Security-update PRs from before that config (or on
-branches it doesn't cover) may still target **`main`**. Policy: **merge
-everything that is not failing the automatic checks that run on PR creation.**
-No confirmation is needed per PR, and bump size is not a reason to hold, except
-as noted in step 4. Merging to `develop` publishes an OTA update (`eas update`);
-merging to `main` runs an export check only (no store submission).
+branches it doesn't cover) may still target **`main`**; those are retargeted
+to `develop`. Policy: **merge everything that is not failing the automatic
+checks that run on PR creation.** No confirmation is needed per PR, and bump
+size is not a reason to hold, except as noted in step 4. Merging to `develop`
+publishes an OTA update (`eas update`).
 
 ## 1. List open Dependabot PRs
 
@@ -22,8 +22,21 @@ gh pr list --author "app/dependabot" --state open --limit 50 \
   --json number,title,baseRefName,mergeable,mergeStateStatus,statusCheckRollup,url
 ```
 
-If there are none, say so and stop. Skip (and report) any PR whose base isn't
-`main` or `develop`.
+If there are none, say so and stop.
+
+**Retarget any PR whose base is `main` to `develop`** before classifying, one
+at a time:
+
+```
+gh pr edit <n> --base develop
+gh pr comment <n> --body "@dependabot rebase"
+```
+
+Never merge a Dependabot PR into `main`. Changing the base does not re-run
+the checks, so the existing results are stale (they were run against `main`);
+the `@dependabot rebase` rebuilds the branch on `develop` and triggers fresh
+checks. Report retargeted PRs as pending this run, and they are classified
+and merged normally on the next run. Skip (and report) any PR whose base is neither `develop` nor `main`.
 
 ## 2. Classify each PR from `statusCheckRollup`
 
@@ -58,11 +71,10 @@ the next run.
 ## 4. Report
 
 Give a short table: merged (number, package, from→to), failing (with cause),
-pending, conflicting/awaiting rebase, skipped (other base). Call out any
-**major version bumps** or bumps of `expo`, `react-native`, or `react` that were
-merged, since Expo SDK versions are pinned together and these can break the
-app even when checks pass; recommend a local `yarn install` + smoke test.
+pending, conflicting/awaiting rebase, retargeted from `main`, skipped (other
+base). Call out any **major version bumps** or bumps of `expo`, `react-native`,
+or `react` that were merged, since Expo SDK versions are pinned together and
+these can break the app even when checks pass; recommend a local
+`yarn install` + smoke test.
 
-Merging to `main` leaves `develop` behind. Mention that `develop` should pull
-`origin/main` afterwards. Don't close PRs or comment `@dependabot ignore`
-unless the user asks.
+Don't close PRs or comment `@dependabot ignore` unless the user asks.

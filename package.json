@@ -36,7 +36,7 @@
     "expo": "^56.0.24",
     "expo-font": "~58.0.11",
     "expo-status-bar": "~58.0.4",
-    "lucide-react-native": "1.68.0",
+    "lucide-react-native": "1.72.0",
     "react": "19.2.9",
     "react-dom": "19.2.3",
     "react-native": "0.85.3",
